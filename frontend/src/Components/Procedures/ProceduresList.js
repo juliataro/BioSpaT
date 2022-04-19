@@ -214,6 +214,10 @@ export default function EnhancedTable(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [procedures, setProcedures] = useState([]);
+  const {
+    targetsValue,
+    setTargetsValue,
+  } = props;
 
 
   // Tabele header arrows for sorting
@@ -277,10 +281,17 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - procedures.length) : 0;
 
+ const chosenValues = {
+    targetsValue,
+    setTargetsValue,
+  }; 
+
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
       <GenericBtn
+        id={targetsValue.id}
+        {...chosenValues}
         setProcedures={setProcedures}
       />
 

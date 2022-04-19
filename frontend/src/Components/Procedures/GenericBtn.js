@@ -16,14 +16,25 @@ const classes = {
 };
 
 const GenericBtn = (props) => {
-  const { setProcedures } = props;
+  const { targetsValue, setProcedures } = props;
 
+  // Method fetches Procedures depending on diseases
+  const loadProceduresTargets = async () => {
+    const idsQuery = targetsValue
+      .map((n, index) => `id[${index}]=${n}`)
+      .join("&");
+    const response = await axios.get(
+      `http://localhost:4000/procedures/procedures_targets?${idsQuery}`
+    );
+    setProcedures(response.data);
+  };
 
   return (
     <Button
       style={classes.searchBtn}
       spacing={5}
       onClick={() => {
+        loadProceduresTargets(targetsValue.id);
       }}
       variant="contained"
     >

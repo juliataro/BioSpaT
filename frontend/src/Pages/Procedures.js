@@ -70,11 +70,15 @@ const classes = {
 export const Procedures = () => {
   const [diseases, setDiseases] = useState([]);
   const [targets, setTargets] = useState([]);
+  const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
   const [symptoms, setSymptoms] = useState([]);
-
+  
   // One variable for all useStates for passing
   const obj = {
     targets,
+    setTargets,
+    targetsValue,
+    setTargetsValue,
     diseases,
     symptoms,
   };
