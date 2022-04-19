@@ -215,6 +215,8 @@ export default function EnhancedTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [procedures, setProcedures] = useState([]);
   const {
+    diseasesValue,
+    setDiseasesValue,
     targetsValue,
     setTargetsValue,
   } = props;
@@ -284,13 +286,15 @@ export default function EnhancedTable(props) {
  const chosenValues = {
     targetsValue,
     setTargetsValue,
+    diseasesValue,
+    setDiseasesValue,
   }; 
 
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
       <GenericBtn
-        id={targetsValue.id}
+        id={diseasesValue.id}
         {...chosenValues}
         setProcedures={setProcedures}
       />

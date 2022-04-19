@@ -16,7 +16,18 @@ const classes = {
 };
 
 const GenericBtn = (props) => {
-  const { targetsValue, setProcedures } = props;
+  const { targetsValue, diseasesValue, setProcedures } = props;
+
+  // Method fetches Procedures depending on diseases
+  const loadProceduresDiseases = async () => {
+    const idsQuery = diseasesValue
+      .map((n, index) => `id[${index}]=${n}`)
+      .join("&");
+    const response = await axios.get(
+      `http://localhost:4000/procedures/procedures_diseases?${idsQuery}`
+    );
+    setProcedures(response.data);
+  };
 
   // Method fetches Procedures depending on diseases
   const loadProceduresTargets = async () => {
@@ -35,6 +46,8 @@ const GenericBtn = (props) => {
       spacing={5}
       onClick={() => {
         loadProceduresTargets(targetsValue.id);
+        loadProceduresDiseases(diseasesValue.id);
+
       }}
       variant="contained"
     >

@@ -9,8 +9,9 @@ const router = express.Router();
 
 // Here Added On in name to show Only Procedures that Depends On Definite procedures
 
-router.route("/procedures_targets").get(pControllers.getProceduresTargets);
+router.route("/procedures_diseases").get(pControllers.getProceduresDiseases);
 
+router.route("/procedures_targets").get(pControllers.getProceduresTargets);
 
 /** ------------------------------------------------------------------
  * Routses GET && POST && PUT && DELETE /procedures/ for Admin-panel

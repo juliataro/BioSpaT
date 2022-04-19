@@ -39,7 +39,14 @@ class Procedure {
     return db.execute(sql);
   }
 
-  
+  // Procedures on Diseases
+  static findAllProceduresOnDiseases(disIdsStr) {
+    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
+    INNER JOIN procedures_diseases INNER JOIN diseases ON procedures.proc_id=procedures_diseases.procedures_id 
+    AND procedures_diseases.diseases_id=diseases.dis_id WHERE diseases.dis_id NOT IN (${disIdsStr}) ORDER BY procedures.proc_price; `;
+    return db.execute(sql);
+  }
+
   /** ------------------------------------------------------------------
    * ADMINS-PANEL MySQL statements for Procedures Controller methods
    */

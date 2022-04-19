@@ -22,6 +22,26 @@ exports.getProceduresTargets = async (req, res, next) => {
 };
 
 
+//  Method fetches Procedures dependendent on Diseaes values and ids
+
+exports.getProceduresDiseases = async (req, res, next) => {
+  try {
+    //Access the provided 'id' as query parameter that is passing to button
+    let disIds = req.query.id;
+    let disIdsStr = disIds.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (
+      await Procedure.findAllProceduresOnDiseases(disIdsStr)
+    )[0]; // Passing ids variable to method
+
+    // Returning the procedures to the rendering engine
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+
 /** ------------------------------------------------------------------
  * ADMINS-PANEL controller Methods for procedures routses
  */

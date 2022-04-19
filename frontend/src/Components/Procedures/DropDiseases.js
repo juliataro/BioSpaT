@@ -18,28 +18,43 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 //  TODO Extract list of diseases from db into dropdown list
 function DropDiseases(props) {
-  const { diseases } = props;
+  const { diseases, setDiseases, diseasesValue, setDiseasesValue } = props;
+
+  // Fetch Diseases in dropdown on Page load
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await axios.get("http://localhost:4000/diseases/all/et");
+      setDiseases(response.data);
+    };
+    loadData();
+  }, [setDiseases]);
+
+  function handleSelectChange(event, newValues) {
+    setDiseasesValue(newValues.map((disease) => disease.dis_id));
+    console.log(diseasesValue);
+  }
 
   return (
-    
-        <Autocomplete
-          multiple={true}
-          id="valueId"
-          options={diseases}
-          disableCloseOnSelect
-          getOptionLabel={(option) => `${option.dis_title_et}`}
-          // onChange={handleChange}
-          renderOption={(props, option, { diseases }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={diseases}
-              />
-              {[option.dis_title_et]}
-            </li>
-          )}
+
+    <Autocomplete
+    onChange={handleSelectChange}
+    multiple={true}
+    id="valueId"
+    options={diseases}
+    disableCloseOnSelect
+    getOptionLabel={(option) => `${option.dis_title_et}`}
+    // onChange={handleChange}
+    renderOption={(props, option, { setDiseasesValue }) => (
+      <li {...props}>
+        <Checkbox
+          icon={icon}
+          checkedIcon={checkedIcon}
+          style={{ marginRight: 8 }}
+          checked={setDiseasesValue}
+        />
+        {[option.dis_title_et]}
+      </li>
+    )}
           style={{ width: "100%" }}
           renderInput={(params) => (
             <TextField
