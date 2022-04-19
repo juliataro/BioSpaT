@@ -20,6 +20,7 @@ app.use(express.json());
 
 // Redirect requests to endpoint starting with /procedures to getProsedures.js
 app.use("/procedures", require("./routes/procedureRoutes"));
+app.use("/symptoms", require("./routes/symptomRoutes"));
 app.use("/targets", require("./routes/targetRoutes"));
 app.use("/diseases", require("./routes/diseaseRoutes"));
 

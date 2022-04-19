@@ -73,6 +73,7 @@ export const Procedures = () => {
   const [targets, setTargets] = useState([]);
   const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
   const [symptoms, setSymptoms] = useState([]);
+  const [symptomsValue, setSymptomsValue] = useState([]); // Responsible for catching chousen ID in dropdown
 
   // One variable for all useStates for passing
   const obj = {
@@ -85,6 +86,9 @@ export const Procedures = () => {
     diseasesValue,
     setDiseasesValue,
     symptoms,
+    setSymptoms,
+    symptomsValue,
+    setSymptomsValue,
   };
 
   return (

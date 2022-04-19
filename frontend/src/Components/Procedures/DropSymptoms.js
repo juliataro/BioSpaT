@@ -18,24 +18,39 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 //  TODO Extract list of diseases from db into dropdown list
 function DropSymptoms(props) {
-  const { symptoms } = props;
+  const { symptoms, setSymptoms, symptomsValue, setSymptomsValue } = props;
+
+  // Fetch Diseases in dropdown on Page load
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await axios.get("http://localhost:4000/symptoms/all/et");
+      setSymptoms(response.data);
+    };
+    loadData();
+  }, [setSymptoms]);
+
+  function handleSelectChange(event, newValues) {
+    setSymptomsValue(newValues.map((symptom) => symptom.symp_id));
+    console.log(symptomsValue);
+  }
 
   return (
   
-        <Autocomplete
+          <Autocomplete
+          onChange={handleSelectChange}
           multiple={true}
           id="valueId"
           options={symptoms}
           disableCloseOnSelect
           getOptionLabel={(option) => `${option.symp_title_et}`}
           // onChange={handleChange}
-          renderOption={(props, option, { symptoms }) => (
+          renderOption={(props, option, { setSymptomsValue }) => (
             <li {...props}>
               <Checkbox
                 icon={icon}
                 checkedIcon={checkedIcon}
                 style={{ marginRight: 8 }}
-                checked={symptoms}
+                checked={setSymptomsValue}
               />
               {[option.symp_title_et]}
             </li>

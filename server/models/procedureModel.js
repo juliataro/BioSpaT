@@ -30,7 +30,15 @@ class Procedure {
    *  MySQL statements for Procedures Controller methods
    */
 
-  
+
+    // Procedures on Symptoms
+   static findAllProceduresOnSymptoms(idsAsString) {
+    let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 
+    INNER JOIN procedures_symptoms INNER JOIN symptoms ON procedures.proc_id=procedures_symptoms.procedures_id
+    AND procedures_symptoms.symptoms_id=symptoms.symp_id WHERE symptoms.symp_id NOT IN (${idsAsString}) ORDER BY procedures.proc_price; `;
+    return db.execute(sql);
+  }
+
   // Procedures on Targets
   static findAllProceduresOnTargets(tarIdsString) {
     let sql = `SELECT procedures.proc_title_et, procedures.proc_descr_et, procedures.proc_duration, procedures.proc_price FROM procedures 

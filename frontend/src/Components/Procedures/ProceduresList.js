@@ -219,6 +219,8 @@ export default function EnhancedTable(props) {
     setDiseasesValue,
     targetsValue,
     setTargetsValue,
+    symptomsValue, 
+    setSymptomsValue
   } = props;
 
 
@@ -288,13 +290,15 @@ export default function EnhancedTable(props) {
     setTargetsValue,
     diseasesValue,
     setDiseasesValue,
+    symptomsValue, 
+    setSymptomsValue
   }; 
 
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
       <GenericBtn
-        id={diseasesValue.id}
+        id={symptomsValue.id}
         {...chosenValues}
         setProcedures={setProcedures}
       />
