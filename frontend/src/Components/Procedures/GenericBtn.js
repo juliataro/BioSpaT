@@ -16,38 +16,46 @@ const classes = {
 };
 
 const GenericBtn = (props) => {
-  const { targetsValue, diseasesValue, symptomsValue, setProcedures } = props;
+  const { targetsValue, diseasesValue, symptomsValue, priceValue, setProcedures } = props;
 
-  // Method fetches Procedures depending on diseases
-  const loadProceduresDiseases = async () => {
-    const idsQuery = diseasesValue
-      .map((n, index) => `id[${index}]=${n}`)
-      .join("&");
-    const response = await axios.get(
-      `http://localhost:4000/procedures/procedures_diseases?${idsQuery}`
-    );
-    setProcedures(response.data);
-  };
+  const loadProceduresPrice = async () => {
+  let minPrice = priceValue.slice(0, 1);
+  let maxPrice = priceValue.slice(1, 2);
 
-  // Method fetches Procedures depending on diseases
-  const loadProceduresTargets = async () => {
-    const idsQuery = targetsValue
-      .map((n, index) => `id[${index}]=${n}`)
-      .join("&");
-    const response = await axios.get(
-      `http://localhost:4000/procedures/procedures_targets?${idsQuery}`
-    );
-    setProcedures(response.data);
-  };
+  const tarIds = targetsValue
+  .map((n, index) => `tarid[${index}]=${n}`)
+  .join("&");
+  
+  const sympIds = symptomsValue
+  .map((n, index) => `sympid[${index}]=${n}`)
+  .join("&");
 
-  const loadProceduresSymptoms = async () => {
-    const idsQuery = symptomsValue
-      .map((n, index) => `id[${index}]=${n}`)
-      .join("&");
-    const response = await axios.get(
-      `http://localhost:4000/procedures/procedures_symptoms?${idsQuery}`
-    );
-    setProcedures(response.data);
+  const disIds = diseasesValue
+  .map((n, index) => `disid[${index}]=${n}`)
+  .join("&");
+  
+  var urlQuery = [];
+  if (targetsValue) {
+    urlQuery.push(`${tarIds}`);
+  }
+  if (symptomsValue) {
+    urlQuery.push(`&${sympIds}`);
+  }
+  if (diseasesValue) {
+    urlQuery.push(`&${disIds}`);
+  }
+  if (priceValue) {
+    urlQuery.push(`&pricemin=${minPrice}&pricemax=${maxPrice}`);
+  }
+  var url = urlQuery.join('');
+  
+
+  const response = await axios.get(
+    `http://localhost:4000/procedures/procedures_prices?${url}`
+  );
+
+  setProcedures(response.data);
+  
   };
 
   return (
@@ -55,9 +63,7 @@ const GenericBtn = (props) => {
       style={classes.searchBtn}
       spacing={5}
       onClick={() => {
-        loadProceduresDiseases(diseasesValue.id);
-        loadProceduresTargets(targetsValue.id);
-        loadProceduresSymptoms(symptomsValue.id);
+        loadProceduresPrice(priceValue, targetsValue, symptomsValue, diseasesValue);
       }}
       variant="contained"
     >

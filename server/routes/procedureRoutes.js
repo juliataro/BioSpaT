@@ -15,6 +15,8 @@ router.route("/procedures_targets").get(pControllers.getProceduresTargets);
 
 router.route("/procedures_symptoms").get(pControllers.getProceduresSymptoms);
 
+router.route("/procedures_prices").get(pControllers.getProceduresPrices);
+
 /** ------------------------------------------------------------------
  * Routses GET && POST && PUT && DELETE /procedures/ for Admin-panel
  */
@@ -25,6 +27,9 @@ router.route("/newprocedure").post(pControllers.postNewProcedure);
 
 // GET procedure by Id
 router.route("/:id").get(pControllers.getProcedureById);
+
+router.route("/:price").get(pControllers.getProceduresPrices);
+
 
 // PUT & DELETE router by Id
 router

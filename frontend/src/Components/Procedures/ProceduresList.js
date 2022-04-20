@@ -220,7 +220,9 @@ export default function EnhancedTable(props) {
     targetsValue,
     setTargetsValue,
     symptomsValue, 
-    setSymptomsValue
+    setSymptomsValue,
+    priceValue,
+    setPriceValue
   } = props;
 
 
@@ -291,7 +293,9 @@ export default function EnhancedTable(props) {
     diseasesValue,
     setDiseasesValue,
     symptomsValue, 
-    setSymptomsValue
+    setSymptomsValue,
+    priceValue,
+     setPriceValue
   }; 
 
   return (
@@ -300,6 +304,7 @@ export default function EnhancedTable(props) {
       <GenericBtn
         id={symptomsValue.id}
         {...chosenValues}
+        priceValue={priceValue}
         setProcedures={setProcedures}
       />
 

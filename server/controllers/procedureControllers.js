@@ -21,6 +21,50 @@ exports.getProceduresTargets = async (req, res, next) => {
   }
 };
 
+exports.getProceduresPrices = async (req, res, next) => {
+  try {
+
+    if (req.query.tarid) {
+      let tarIds = req.query.tarid;
+      tarIdsString = tarIds.toString();
+    } else {
+      tarIdsString = null;
+    }
+
+    if (req.query.pricemin && req.query.pricemax) {
+      let priceMin = req.query.pricemin;
+      let priceMax = req.query.pricemax;
+    } else {
+      priceMin = null;
+      priceMax = null;
+    }
+
+    if (req.query.sympid) {
+      let sympIds = req.query.sympid;
+      sympIdsString = sympIds.toString(); 
+    } else {
+      sympIdsString = null;
+    }
+
+    if (req.query.disid) {
+      let disIds = req.query.disid;
+      disIdsString = disIds.toString(); 
+    } else {
+      disIdsString = null;
+    }
+  
+    console.log('price', priceMin, priceMax, tarIdsString, sympIdsString, disIdsString);
+      let procedures = (
+        await Procedure.findAllProceduresOnPrice(priceMin, priceMax, tarIdsString, sympIdsString, disIdsString)
+      )[0]; // Passing ids variable to method
+      res.status(200).json(procedures);
+
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 
 //  Method fetches Procedures dependendent on Diseaes values and ids
 
@@ -46,11 +90,24 @@ exports.getProceduresDiseases = async (req, res, next) => {
 
 exports.getProceduresSymptoms = async (req, res, next) => {
   try {
-    let ids = req.query.id;
-    let idsAsString = ids.toString(); // To stringify array of ids to pass it to models SQL clause
+    let sympIds = req.query.id;
+    let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
     let procedures = (
-      await Procedure.findAllProceduresOnSymptoms(idsAsString)
+      await Procedure.findAllProceduresOnSymptoms(sympIdsString)
     )[0]; // Passing ids variable to method
+
+    res.status(200).json(procedures);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+exports.getProceduresTargetsSymptoms = async (req, res, next) => {
+  try {
+    let sympIds = req.query.id;
+    let sympIdsString = sympIds.toString(); // To stringify array of ids to pass it to models SQL clause
+    let procedures = (await Procedure.getAllProcOnTarAndSymp(sympIdsString))[0]; // Passing ids variable to method
 
     res.status(200).json(procedures);
   } catch (error) {
@@ -120,6 +177,19 @@ exports.getProcedureById = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getProcedureByPrice = async (req, res, next) => {
+  try {
+    let [procedure, _] = await Procedure.findById(req.params.id);
+
+    res.status(200).json(procedure);
+    res.send(rows);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 
 // Update Procedure By Id
 exports.updateProcedureById = async (req, res, next) => {};

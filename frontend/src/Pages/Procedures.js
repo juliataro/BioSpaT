@@ -74,6 +74,7 @@ export const Procedures = () => {
   const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
   const [symptoms, setSymptoms] = useState([]);
   const [symptomsValue, setSymptomsValue] = useState([]); // Responsible for catching chousen ID in dropdown
+  const [priceValue, setPriceValue] = useState([]);
 
   // One variable for all useStates for passing
   const obj = {
@@ -89,6 +90,8 @@ export const Procedures = () => {
     setSymptoms,
     symptomsValue,
     setSymptomsValue,
+    priceValue,
+    setPriceValue,
   };
 
   return (
@@ -131,7 +134,9 @@ export const Procedures = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Slider />
+              <Slider 
+                {...obj}
+                />
             </Grid>
           </div>
         </Grid>
