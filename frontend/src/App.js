@@ -7,6 +7,7 @@ import Navbar from "./Components/Header/Navbar";
 import { Procedures } from "./Pages/Procedures";
 import { About } from "./Pages/About";
 
+// Global Colors
 
 function App() {
   return (

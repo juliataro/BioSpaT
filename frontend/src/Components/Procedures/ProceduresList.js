@@ -219,12 +219,16 @@ export default function EnhancedTable(props) {
     setDiseasesValue,
     targetsValue,
     setTargetsValue,
-    symptomsValue, 
+    symptomsValue,
     setSymptomsValue,
-    priceValue,
-    setPriceValue
+    pricesValue,
+    setPricesValue,
   } = props;
 
+  //   useEffect(() => {
+  //     loadProcedures();
+  //   }, []);
+  //   console.log(procedures);
 
   // Tabele header arrows for sorting
   const handleRequestSort = (event, property) => {
@@ -287,26 +291,21 @@ export default function EnhancedTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - procedures.length) : 0;
 
- const chosenValues = {
-    targetsValue,
-    setTargetsValue,
+  const chosenValues = {
     diseasesValue,
     setDiseasesValue,
-    symptomsValue, 
+    targetsValue,
+    setTargetsValue,
+    symptomsValue,
     setSymptomsValue,
-    priceValue,
-     setPriceValue
-  }; 
+    pricesValue,
+    setPricesValue,
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
       {/*  Button fetches procedures data */}
-      <GenericBtn
-        id={symptomsValue.id}
-        {...chosenValues}
-        priceValue={priceValue}
-        setProcedures={setProcedures}
-      />
+      <GenericBtn {...chosenValues} setProcedures={setProcedures} />
 
       {/*  Table consistens */}
       <Paper sx={{ width: "100%", mb: 2 }}>

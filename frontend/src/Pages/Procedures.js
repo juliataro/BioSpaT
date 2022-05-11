@@ -12,10 +12,12 @@ import Typography from "@mui/material/Typography";
 import ProceduresList from "../Components/Procedures/ProceduresList";
 import DropDiseases from "../Components/Procedures/DropDiseases";
 
+// import axios from "axios";
 
 const classes = {
   root: {
-   
+    /* marginLeft: "2rem",
+    marginRight: "2rem", */
   },
   intro: {
     backgroundColor: "#EDEDED",
@@ -29,16 +31,12 @@ const classes = {
   sec: {
     margin: "auto",
     maxWidth: "1200px",
-    paddingRight: "30px",
-    paddingLeft: "30px"
   },
   secTwo: {
     margin: "auto",
     maxWidth: "1200px",
     marginTop: "5rem",
     marginLeft: "-19px !important",
-    paddingRight: "30px",
-    paddingLeft: "30px"
   },
   container: {
     width: "100%",
@@ -49,8 +47,10 @@ const classes = {
     display: "flex",
     marginTop: "4rem",
   },
-  secResult: {
-    marginLeft: 6,
+  containerThird: {
+    width: "100%",
+    display: "flex",
+    marginLeft: "-19px !important",
   },
   filter: {
     width: "100%",
@@ -74,7 +74,8 @@ export const Procedures = () => {
   const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
   const [symptoms, setSymptoms] = useState([]);
   const [symptomsValue, setSymptomsValue] = useState([]); // Responsible for catching chousen ID in dropdown
-  const [priceValue, setPriceValue] = useState([]);
+  const [procedures, setProcedures] = useState([]);
+  const [pricesValue, setPricesValue] = useState([]);
 
   // One variable for all useStates for passing
   const obj = {
@@ -90,17 +91,24 @@ export const Procedures = () => {
     setSymptoms,
     symptomsValue,
     setSymptomsValue,
-    priceValue,
-    setPriceValue,
+    procedures,
+    setProcedures,
+    pricesValue,
+    setPricesValue,
   };
 
   return (
     <div style={classes.root}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid
+        container
+        rowSpacing={1}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        id="procedurePage"
+      >
         <Grid item xs={12} style={classes.intro}>
           {/* HEADER */}
           <div style={classes.sec}>
-            <Typography variant="h4" component="div" gutterBottom style={{maxWidth: "45%"}}>
+            <Typography variant="h4" component="div" gutterBottom>
               Loodus BioSpa on eksklusiivne butiik-SPA
             </Typography>
             {/* INTRO TEXT */}
@@ -115,7 +123,8 @@ export const Procedures = () => {
           {/*This item will be 12 units on extra small screens */}
           {/*But will be 6 units on small screens */}
           <div style={classes.container}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} id="targetComp">
+              <reference types="cypress" />
               <DropTargets {...obj} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -130,22 +139,21 @@ export const Procedures = () => {
           <div style={classes.containerSecond}>
             <Grid item xs={12} sm={6}>
               <DropDiseases
-                {...obj}
+                {...obj} ///////////////////////////// All states and setStates are in one variable
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Slider 
-                {...obj}
-                />
+              <Slider {...obj} />
             </Grid>
           </div>
         </Grid>
       </div>
       <div style={classes.secTwo}>
         <Grid
+          style={classes.containerThird}
           container
           rowSpacing={1}
-          style={classes.secResult}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item xs={12}>
             <ProceduresList {...obj} />

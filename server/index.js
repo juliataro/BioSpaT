@@ -12,13 +12,33 @@ var corsOptions = {
 // Allowing to make calls from frontend to backend api
 app.use(cors(corsOptions));
 
+// app.use((req, rew, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "Origin",
+//     "X-Requested-With",
+//     "Content-Type",
+//     "Accept",
+//     "Authorization"
+//   );
+//   if (req.method === "OPTIONS") {
+//     req.header("Access-Control-Allow-Origin", "PUT, POST, PATCH, DELETE, GET");
+//     return res.status(200).json({});
+//   }
+//   next();
+// });
+
+// Using .use() method to use as middleware in App
+
+// Analise requests from req.body in this middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Middleware parse json bodies in the request object
 app.use(express.json());
 
-// Redirect requests to endpoint starting with /procedures to getProsedures.js
+// Redirect requests to endpoint starting with /entity to matching folders /route/file
 app.use("/procedures", require("./routes/procedureRoutes"));
 app.use("/symptoms", require("./routes/symptomRoutes"));
 app.use("/targets", require("./routes/targetRoutes"));

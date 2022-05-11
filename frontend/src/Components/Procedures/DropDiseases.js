@@ -29,33 +29,39 @@ function DropDiseases(props) {
     loadData();
   }, [setDiseases]);
 
+  // Handling Selected valjues
   function handleSelectChange(event, newValues) {
     setDiseasesValue(newValues.map((disease) => disease.dis_id));
     console.log(diseasesValue);
   }
 
-  return (
+  //////////////////////////////////////////////////////////////////////////////
 
-    <Autocomplete
-    onChange={handleSelectChange}
-    multiple={true}
-    id="valueId"
-    options={diseases}
-    disableCloseOnSelect
-    getOptionLabel={(option) => `${option.dis_title_et}`}
-    // onChange={handleChange}
-    renderOption={(props, option, { setDiseasesValue }) => (
-      <li {...props}>
-        <Checkbox
-          icon={icon}
-          checkedIcon={checkedIcon}
-          style={{ marginRight: 8 }}
-          checked={setDiseasesValue}
-        />
-        {[option.dis_title_et]}
-      </li>
-    )}
-          style={{ width: "100%" }}
+  return (
+    <Grid container spacing={5}>
+      <Grid item xs={6}>
+        {/* -------------------------------------------------------------------------------------------------- */}
+        {/* Dropdown element */}
+        <Autocomplete
+          onChange={handleSelectChange}
+          multiple={true}
+          id="valueId"
+          options={diseases}
+          disableCloseOnSelect
+          getOptionLabel={(option) => `${option.dis_title_et}`}
+          // onChange={handleChange}
+          renderOption={(props, option, { setDiseasesValue }) => (
+            <li {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={setDiseasesValue}
+              />
+              {[option.dis_title_et]}
+            </li>
+          )}
+          style={{ width: 500 }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -64,8 +70,11 @@ function DropDiseases(props) {
             />
           )}
         />
-      
-    
+      </Grid>
+
+      {/* -------------------------------------------------------------------------------------------------- */}
+      {/* Fetching Procedures data from DataBase */}
+    </Grid>
   );
 }
 export default DropDiseases;

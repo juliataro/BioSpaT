@@ -1,30 +1,63 @@
 import * as React from "react";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import Slider from "@mui/material/Slider";
+import MuiInput from "@mui/material/Input";
 
-export default function RangeSlider(props) {
-  const  {priceValue, setPriceValue} = props;
-  const [price, setPrice] = React.useState([20, 37]);
+const Input = styled(MuiInput)`
+  width: 42px;
+`;
 
-  function handleSelectChange(event, newValues) {
-    setPrice(newValues.map((priceValue) => priceValue));
-    setPriceValue(priceValue => price);
-    console.log(priceValue);
-  }
+function RangeSlider(props) {
+  //const  [price, setPrice] = React.useState([20, 37]);
+  const { pricesValue, setPricesValue } = props;
+  const [value, setValue] = React.useState(30);
+
+  const handleInputChange = (event) => {
+    setValue(event.target.value === "" ? "" : Number(event.target.value));
+  };
+
+  const handleSliderChange = (event, newValues) => {
+    setValue(newValues);
+    setPricesValue(newValues === "" ? "" : Number(newValues));
+    console.log(pricesValue);
+  };
+
+  // Every time you get out of focus from the input field, the event will trigger
 
   return (
-    <Box sx={{ width: "100%", marginLeft: "30px", paddingRight: "30px" }}>
+    <Box sx={{ width: 250 }}>
       <Typography id="input-slider" gutterBottom>
         Hind
       </Typography>
-      <Slider
-        getAriaLabel={() => "Hinnavahemik"}
-        value={price}
-        onChange={handleSelectChange}
-        valueLabelDisplay="auto"
-      />
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs>
+          <Slider
+            value={typeof value === "number" ? value : 30}
+            onChange={handleSliderChange}
+            aria-labelledby="input-slider"
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            value={value}
+            size="small"
+            onChange={handleInputChange}
+            // onBlur={handleBlur}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
     </Box>
   );
 }
 
+export default RangeSlider;

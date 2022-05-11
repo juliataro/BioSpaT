@@ -35,8 +35,11 @@ function DropSymptoms(props) {
   }
 
   return (
-  
-          <Autocomplete
+    <Grid container spacing={5}>
+      <Grid item xs={6}>
+        {/* -------------------------------------------------------------------------------------------------- */}
+        {/* Dropdown element */}
+        <Autocomplete
           onChange={handleSelectChange}
           multiple={true}
           id="valueId"
@@ -55,7 +58,7 @@ function DropSymptoms(props) {
               {[option.symp_title_et]}
             </li>
           )}
-          style={{ width: "100%" }}
+          style={{ width: 500 }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -64,7 +67,11 @@ function DropSymptoms(props) {
             />
           )}
         />
-    
+      </Grid>
+
+      {/* -------------------------------------------------------------------------------------------------- */}
+      {/* Fetching Procedures data from DataBase */}
+    </Grid>
   );
 }
 export default DropSymptoms;

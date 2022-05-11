@@ -11,22 +11,24 @@
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.4.0",
+    "@sentry/react": "^6.19.6",
+    "@sentry/tracing": "^6.19.6",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
+    "cypress": "^9.5.4",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.0",
-    "web-vitals": "^2.1.4",
-    "yarn": "^1.22.18"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,6 +50,8 @@
     ]
   },
   "devDependencies": {
+    "chance": "^1.1.8",
+    "cypress-react-unit-test": "3.0.0-cypress-mount-mode.14",
     "nodemon": "^2.0.15",
     "react-router-dom": "^6.2.1",
     "webpack-cli": "^4.9.2"
