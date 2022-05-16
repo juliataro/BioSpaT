@@ -67,15 +67,14 @@ const classes = {
 
 export const Procedures = () => {
   const [diseases, setDiseases] = useState([]);
-  const [diseasesValue, setDiseasesValue] = useState([]); // Responsible for catching chousen ID in dropdown
+  const [diseasesValue, setDiseasesValue] = useState([]); // Catches chosen Diseases in Dropdown
   const [targets, setTargets] = useState([]);
-  const [targetsValue, setTargetsValue] = useState([]); // Responsible for catching chousen ID in dropdown
+  const [targetsValue, setTargetsValue] = useState([]); // Catches chosen Targets in Dropdown
   const [symptoms, setSymptoms] = useState([]);
-  const [symptomsValue, setSymptomsValue] = useState([]); // Responsible for catching chousen ID in dropdown
+  const [symptomsValue, setSymptomsValue] = useState([]); // Catches chosen Symptoms in Dropdown
   const [procedures, setProcedures] = useState([]);
-  const [selectedProc, setSelectedProc] = useState([]);
+  const [procValue, setProcValue] = useState([]); // Catches chosen Procedures in Tabel
   const [pricesValue, setPricesValue] = useState([]);
- 
 
   /**Drop
    * One variable for all useStates for passing, priceValue and procedures initia
@@ -97,8 +96,8 @@ export const Procedures = () => {
     setProcedures,
     pricesValue,
     setPricesValue,
-    selectedProc, 
-    setSelectedProc
+    procValue,
+    setProcValue,
   };
 
   return (

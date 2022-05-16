@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,8 +14,6 @@ LogRocket.identify("mfxcuw/biospa-new", {
   name: "Julia Taro",
   email: "julia.taro@gmail.com",
 
-  // Add your own custom user variables here, ie:
-  subscriptionType: "pro",
 });
 
 // Global Colors
@@ -34,3 +33,4 @@ function App() {
 }
 
 export default App;
+

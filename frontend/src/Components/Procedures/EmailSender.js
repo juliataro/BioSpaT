@@ -8,16 +8,13 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 
 import axios from "axios";
 import { useState } from "react";
 import sending from "../../Images/sending.svg";
 import "../../index.css";
 
-function EmailSender() {
+function EmailSender(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -50,6 +47,9 @@ function EmailSender() {
 
     if (name && email && subject && message !== "" && email.match(regexTest)) {
       setLoading(true);
+
+      // Adding array of procedures to Rest Api, if Checkbox is checked - add to Api
+
       console.log({ email, message, name, subject }); // TODO see the object in console
 
       // Rest Api with query parameters
@@ -62,8 +62,8 @@ function EmailSender() {
           alert("Email Sent Successfully");
           setLoading(false);
           console.log(res);
+
           console.log(letter);
-          window.location.reload();
         });
     }
   };
@@ -102,7 +102,10 @@ function EmailSender() {
           >
             <Box mb={2}>
               <TextField
+                // data-private Hides Input Data in LogRocket Video
+                data-private="lipsum"
                 id="name"
+                type="text"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 variant="outlined"
@@ -125,7 +128,10 @@ function EmailSender() {
           >
             <Box mb={2}>
               <TextField
+                // data-private Hides Input Data in LogRocket Video
+                data-private="lipsum"
                 id="email"
+                type="text"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 variant="outlined"
@@ -150,7 +156,10 @@ function EmailSender() {
           >
             <Box mb={2}>
               <TextField
+                // data-private Hides Input Data in LogRocket Video
+                data-private="lipsum"
                 id="subject"
+                type="text"
                 value={subject}
                 onChange={(event) => setSubject(event.target.value)}
                 variant="outlined"
@@ -160,14 +169,6 @@ function EmailSender() {
               />
             </Box>
           </Tooltip>
-
-          {/* ----------------------------- Checkbox -------------------------- */}
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Saada valitud protseduurid epostile"
-            />
-          </FormGroup>
         </Grid>
 
         {/* -------------------------- Message  -------------------------- */}
@@ -177,7 +178,9 @@ function EmailSender() {
             title={<Typography fontSize={20}>Sisestage sõnum</Typography>}
           >
             <TextField
+              // data-private Hides Input Data in LogRocket Video
               id="message"
+              type="text"
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               label="Sisu"

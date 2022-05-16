@@ -212,7 +212,7 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable(props) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("price");
-  const [selected, setSelected] = React.useState([]);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -228,8 +228,7 @@ export default function EnhancedTable(props) {
     setPricesValue,
     procedures,
     setProcedures,
-    selectedProc, 
-    setSelectedProc
+    procValue, setProcValue,
   } = props;
 
   //   useEffect(() => {
@@ -248,31 +247,31 @@ export default function EnhancedTable(props) {
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = procedures.map((n) => n.proc_title_et);
-      setSelected(newSelecteds);
+      setProcValue(newSelecteds);
       return;
     }
-    setSelected([]);
+    setProcValue([]);
   };
 
   // Every Fetching Result Row Checkbox
   const handleSelectedProcecures = (event, proc_title_et) => {
-    const selectedIndex = selected.indexOf(proc_title_et);
+    const selectedIndex = procValue.indexOf(proc_title_et);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, proc_title_et);
+      newSelected = newSelected.concat(procValue, proc_title_et);
     } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelected = newSelected.concat(procValue.slice(1));
+    } else if (selectedIndex === procValue.length - 1) {
+      newSelected = newSelected.concat(procValue.slice(0, -1));
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        procValue.slice(0, selectedIndex),
+        procValue.slice(selectedIndex + 1)
       );
     }
 
-    setSelected(newSelected);
+    setProcValue(newSelected);
   };
 
   // Changing pages
@@ -287,7 +286,7 @@ export default function EnhancedTable(props) {
   };
 
   // Counting of how much is selected
-  const isSelected = (proc_title_et) => selected.indexOf(proc_title_et) !== -1;
+  const isSelected = (proc_title_et) => procValue.indexOf(proc_title_et) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -304,6 +303,8 @@ export default function EnhancedTable(props) {
     pricesValue,
     procedures,
     setPricesValue,
+    procValue, setProcValue,
+    
   };
 
   return (
@@ -342,7 +343,7 @@ export default function EnhancedTable(props) {
         
         
           <EnhancedTableHead
-            numSelected={selected.length}
+            numSelected={procValue.length}
             order={order}
             orderBy={orderBy}
             onSelectAllClick={handleSelectAllClick}

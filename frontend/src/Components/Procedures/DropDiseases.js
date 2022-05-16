@@ -54,7 +54,8 @@ function DropDiseases(props) {
           {/* -------------------------------------------------------------------------------------------------- */}
           {/* Dropdown element */}
           <Autocomplete
-            data-testid="dropDis-1" // Unit testin id
+            // Unit testin id
+            data-testid="diseasesId"
             style={classes.dropdown}
             onChange={handleSelectChange} // Handler function
             multiple={true}
