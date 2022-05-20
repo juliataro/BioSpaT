@@ -131,6 +131,7 @@ function EmailSender(props) {
                 // data-private Hides Input Data in LogRocket Video
                 data-private="lipsum"
                 id="email"
+                data-testid="email-input"
                 type="text"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -140,6 +141,12 @@ function EmailSender(props) {
                 autoComplete="email"
                 error={emailError}
               />
+              {email &&
+                !/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/g.test(email) && (
+                  <span className="error" data-testid="error-msg">
+                    Palun sisestage aadress õigesti.
+                  </span>
+                )}
             </Box>
           </Tooltip>
         </Grid>
@@ -195,7 +202,8 @@ function EmailSender(props) {
       <Grid item xs={12} sm={6} md={6}>
         <Button
           id="buttonEmail"
-          disabled={loading}
+          data-testid="button"
+          disabled={email === ""}
           onClick={() => {
             handleRequest(name, email, subject, message);
           }}

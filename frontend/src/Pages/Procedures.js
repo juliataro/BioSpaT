@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+
 import Grid from "@mui/material/Grid";
 // import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
@@ -66,39 +67,9 @@ const classes = {
 /**Drop Down elements in two colomns and two rows */
 
 export const Procedures = () => {
-  const [diseases, setDiseases] = useState([]);
-  const [diseasesValue, setDiseasesValue] = useState([]); // Catches chosen Diseases in Dropdown
-  const [targets, setTargets] = useState([]);
-  const [targetsValue, setTargetsValue] = useState([]); // Catches chosen Targets in Dropdown
-  const [symptoms, setSymptoms] = useState([]);
-  const [symptomsValue, setSymptomsValue] = useState([]); // Catches chosen Symptoms in Dropdown
-  const [procedures, setProcedures] = useState([]);
-  const [procValue, setProcValue] = useState([]); // Catches chosen Procedures in Tabel
-  const [pricesValue, setPricesValue] = useState([]);
-
   /**Drop
    * One variable for all useStates for passing, priceValue and procedures initia
    * */
-  const obj = {
-    targets,
-    setTargets,
-    targetsValue,
-    setTargetsValue,
-    diseases,
-    setDiseases,
-    diseasesValue,
-    setDiseasesValue,
-    symptoms,
-    setSymptoms,
-    symptomsValue,
-    setSymptomsValue,
-    procedures,
-    setProcedures,
-    pricesValue,
-    setPricesValue,
-    procValue,
-    setProcValue,
-  };
 
   return (
     <div style={classes.root}>
@@ -133,19 +104,19 @@ export const Procedures = () => {
         {/*-------------------------- First row Targets and Symptoms ---------------------------- */}
         <Grid container spacing={5}>
           <Grid item xs={12} sm={12} md={6}>
-            <DropTargets {...obj} />
+            <DropTargets />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <DropSymptoms {...obj} />
+            <DropSymptoms />
           </Grid>
         </Grid>
         {/*-------------------------- Second row Diseases and Slider ---------------------------- */}
         <Grid container spacing={5}>
           <Grid item xs={12} sm={12} md={6}>
-            <DropDiseases {...obj} />
+            <DropDiseases />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <Slider {...obj} />
+            <Slider />
           </Grid>
         </Grid>
         {/*------------------------------------------------------ */}
@@ -155,7 +126,7 @@ export const Procedures = () => {
       <div style={classes.secTwo}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={12}>
-            <ProceduresList {...obj} />
+            <ProceduresList />
           </Grid>
         </Grid>
       </div>

@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { GlobalContext } from "./../../Context";
+
 import axios from "axios";
 
-import Tooltip from "@mui/material/Tooltip";
+import Tooltip from "@mui/material/Tooltip"; // Hits to customers
 import TextField from "@mui/material/TextField";
 
 import Autocomplete from "@mui/material/Autocomplete";
@@ -19,19 +21,34 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 //////////////////////////////////////////////////////////////////////////////
 
 //  TODO Extract list of diseases from db into dropdown list
-function DropDiseases(props) {
-  const { diseases, setDiseases, diseasesValue, setDiseasesValue } = props;
+function DropDiseases() {
+  // const { diseases, setDiseases, diseasesValue, setDiseasesValue } = props;
 
-  // Fetch Diseases in dropdown on Page load
+  const [diseases, setDiseases] = useState([]);
+  const { diseasesValue, setDiseasesValue } = useContext(GlobalContext); // Catches chosen Diseases in Dropdown
+
+  // Change function view for unit tests
+  async function loadData() {
+    const response = await axios.get(
+      "http://localhost:4000/api/diseases/all/et"
+    );
+    setDiseases(response.data);
+  }
   useEffect(() => {
-    const loadData = async () => {
-      const response = await axios.get(
-        "http://localhost:4000/api/diseases/all/et"
-      );
-      setDiseases(response.data);
-    };
     loadData();
   }, [setDiseases]);
+
+  // Fetch Diseases in dropdown on Page load
+
+  // const loadData = async () => {
+  //   const response = await axios.get(
+  //     "http://localhost:4000/api/diseases/all/et"
+  //   );
+  //   setDiseases(response.data);
+  // };
+  // useEffect(() => {
+  //   loadData();
+  // }, [setDiseases]);
 
   // Handling Selected valjues
   function handleSelectChange(event, newValues) {
@@ -55,6 +72,7 @@ function DropDiseases(props) {
           {/* Dropdown element */}
           <Autocomplete
             // Unit testin id
+
             data-testid="diseasesId"
             style={classes.dropdown}
             onChange={handleSelectChange} // Handler function
@@ -79,7 +97,7 @@ function DropDiseases(props) {
               <TextField
                 {...params}
                 label="Haigused"
-                placeholder="Vali haigused"
+                // placeholder="Vali haigused"
               />
             )}
           />
