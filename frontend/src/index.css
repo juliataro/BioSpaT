@@ -51,9 +51,33 @@ code {
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
 }
 
-.MuiFormControl-root {
-  width: 88% !important;
-  margin-left: 2em !important;
+.MuiFormControl-root,
+.MuiBox-root {
+  width: 95% !important;
+}
+
+.css-1mxz8qt-MuiPaper-root {
+  width: 97% !important;
+}
+
+.css-3zphzr {
+  margin-left: 0 !important;
+}
+
+.MuiFormControl-root,
+.MuiBox-root {
+  width: 103% !important;
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
+  width: 90% !important;
+}
+.internal-autofill-selected {
+  background-color: -internal-light-dark(
+    rgb(111, 222, 174),
+    rgba(120, 198, 191, 0.4)
+  ) !important;
+  color: -internal-light-dark(black, white) !important;
 }
 
 /* ----------- Small dropdown name on top @paddings@ ------------------ */
@@ -115,4 +139,14 @@ code {
 .css-eg0mwd-MuiSlider-thumb:hover,
 .css-eg0mwd-MuiSlider-thumb.Mui-focusVisible {
   box-shadow: 0px 0px 0px 8px rgba(55, 151, 114, 0.16);
+}
+
+/* -----------  Form Message ---------------------  */
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 96% !important;
+}
+
+#buttonEmail {
+  margin-top: 20px;
+  margin-bottom: 60px;
 }

@@ -15,7 +15,7 @@ export default makeStyles((theme) => ({
 
   logo: {
     cursor: "pointer",
-    marginTop: 15,
+    marginTop: 5,
     marginRight: 40,
   },
 

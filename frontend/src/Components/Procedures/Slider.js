@@ -13,12 +13,14 @@ const Input = styled(MuiInput)`
 function RangeSlider(props) {
   //const  [price, setPrice] = React.useState([20, 37]);
   const { pricesValue, setPricesValue } = props;
-  const [value, setValue] = React.useState(30);
+  const [value, setValue] = React.useState(30); // Defolt price
 
+  // Function catching input changes
   const handleInputChange = (event) => {
     setValue(event.target.value === "" ? "" : Number(event.target.value));
   };
 
+  // Function passing new value in slider
   const handleSliderChange = (event, newValues) => {
     setValue(newValues);
     setPricesValue(newValues === "" ? "" : Number(newValues));
@@ -28,7 +30,7 @@ function RangeSlider(props) {
   // Every time you get out of focus from the input field, the event will trigger
 
   return (
-    <Box sx={{ width: 250 }}>
+    <Box xs={12} sm={6} md={10}>
       <Typography id="input-slider" gutterBottom>
         Hind
       </Typography>

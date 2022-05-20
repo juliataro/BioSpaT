@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 
-import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+
+import Tooltip from "@mui/material/Tooltip";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 import Checkbox from "@mui/material/Checkbox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
@@ -23,7 +26,9 @@ function DropSymptoms(props) {
   // Fetch Diseases in dropdown on Page load
   useEffect(() => {
     const loadData = async () => {
-      const response = await axios.get("http://localhost:4000/symptoms/all/et");
+      const response = await axios.get(
+        "http://localhost:4000/api/symptoms/all/et"
+      );
       setSymptoms(response.data);
     };
     loadData();
@@ -35,43 +40,46 @@ function DropSymptoms(props) {
   }
 
   return (
-    <Grid container spacing={5}>
-      <Grid item xs={6}>
-        {/* -------------------------------------------------------------------------------------------------- */}
-        {/* Dropdown element */}
-        <Autocomplete
-          onChange={handleSelectChange}
-          multiple={true}
-          id="valueId"
-          options={symptoms}
-          disableCloseOnSelect
-          getOptionLabel={(option) => `${option.symp_title_et}`}
-          // onChange={handleChange}
-          renderOption={(props, option, { setSymptomsValue }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={setSymptomsValue}
+    <Tooltip
+      title={<Typography fontSize={20}>Valige oma sümptomid</Typography>}
+    >
+      <Grid container>
+        <Grid item xs={12} sm={6} md={12}>
+          {/* -------------------------------------------------------------------------------------------------- */}
+          {/* Dropdown element */}
+          <Autocomplete
+            onChange={handleSelectChange}
+            multiple={true}
+            id="valueId"
+            options={symptoms}
+            disableCloseOnSelect
+            getOptionLabel={(option) => `${option.symp_title_et}`}
+            // onChange={handleChange}
+            renderOption={(props, option, { setSymptomsValue }) => (
+              <li {...props}>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={setSymptomsValue}
+                />
+                {[option.symp_title_et]}
+              </li>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Kaebused"
+                placeholder="Vali kaebused"
               />
-              {[option.symp_title_et]}
-            </li>
-          )}
-          style={{ width: 500 }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Kaebused"
-              placeholder="Vali kaebused"
-            />
-          )}
-        />
-      </Grid>
+            )}
+          />
+        </Grid>
 
-      {/* -------------------------------------------------------------------------------------------------- */}
-      {/* Fetching Procedures data from DataBase */}
-    </Grid>
+        {/* -------------------------------------------------------------------------------------------------- */}
+        {/* Fetching Procedures data from DataBase */}
+      </Grid>
+    </Tooltip>
   );
 }
 export default DropSymptoms;

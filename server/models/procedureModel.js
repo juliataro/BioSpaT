@@ -58,7 +58,7 @@ class Procedure {
       join.push(
         `procedures_symptoms USING (proc_id) JOIN symptoms USING (symp_id)`
       );
-      where.push(`symp_id IN (:clientsSymptoms)`);
+      where.push(`symp_id IN (:clientsSymptoms)`); // placeholder
       namedPlaceholders.clientsSymptoms = sympIds.toString();
     }
 
@@ -94,46 +94,6 @@ class Procedure {
     console.log(rows);
     return rows;
   }
-
-  /** ------------------------------------------------------------------
-   * ADMINS-PANEL MySQL statements for Procedures Controller methods
-   */
-  // Create new
-  // async saveNewProcedure() {
-  //   let sql = `INSERT INTO procedures(proc_title_et,proc_title_ru,proc_title_en,proc_descr_et,proc_descr_ru,proc_descr_en,proc_duration,proc_price)
-  //   VALUES('${this.proc_title_et}','${this.proc_title_ru}','${this.proc_title_en}','${this.proc_descr_et}','${this.proc_descr_ru}','${this.proc_descr_en}','${this.proc_duration}','${this.proc_price}')`;
-
-  //   const [newProcedure, _] = await db.execute(sql);
-  //   return newProcedure;
-  // }
-
-  // // Find all procedures
-  // static findAll() {
-  //   let sql = "SELECT * FROM procedures;";
-  //   return db.execute(sql);
-  // }
-
-  // // Find by ID
-  // static findById(proc_id) {
-  //   let sql = `SELECT * FROM procedures WHERE proc_id = ${proc_id};`;
-  //   return db.execute(sql);
-  // }
-
-  // static findByIdAndUpdate(proc_id) {
-  //   let sql = `UPDATE procedures SET proc_title_et = ${this.proc_title_et},
-  //   proc_title_ru = ${this.proc_title_ru}, proc_title_en = ${this.proc_title_en} WHERE proc_id = ${proc_id} ;`;
-  //   return db.execute(sql);
-  // }
-
-  // static deleteById(proc_id) {
-  //   let sql = `DELETE FROM procedures WHERE proc_id = ${proc_id};`;
-  //   return db.execute(sql);
-  // }
-
-  // static findByPrice() {
-  //   let sql = `SELECT proc_id, proc_price FROM procedures;`;
-  //   return db.execute(sql);
-  // }
 }
 
 module.exports = Procedure;

@@ -2,22 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+
 import { createTheme, ThemeProvider } from "@material-ui/core";
-
-// Sentry testing dependencies
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
-
-Sentry.init({
-  dsn: "https://11481d6138af4c09a2753483c35ae712@o1214838.ingest.sentry.io/6355620",
-  integrations: [new BrowserTracing()],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-});
 
 const theme = createTheme({
   palette: {
@@ -50,5 +36,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-reportWebVitals();

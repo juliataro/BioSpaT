@@ -8,7 +8,7 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+
 import Stack from "@mui/material/Stack";
 import DrawerComponent from "./Drawer";
 import logo from "../../Images/Loodus-BioSpa-Logo-300.png"; //
@@ -21,17 +21,6 @@ function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  // const [Choices, setChoices] = useState("dis_title_et");
-
-  // const loadChoices = async () => {
-  //   const response = await axios.get("http://localhost:4000/diseases/");
-  //   setChoices
-  // };
-
-  // useEffect(() => {
-  //   loadData();
-  // }, [Choices]);
-
   return (
     <AppBar className={classes.navbar} position="static">
       <div className={classes.containerTt}>
@@ -39,7 +28,7 @@ function Navbar() {
         <Toolbar className={classes.section}>
           <Link className={classes.logo} to="/">
             <img
-              width="100px"
+              width="120px"
               height="auto"
               className="img-responsive"
               src={logo}
@@ -57,7 +46,7 @@ function Navbar() {
                 <Link to="/about" className={classes.link}>
                   Meist
                 </Link>
-                <div className={classes.languages}>
+                {/* <div className={classes.languages}>
                   {/* <Link
                   onClick={() => setLangChoices("dis_title_et")}
                   to="/estonian"
@@ -76,11 +65,11 @@ function Navbar() {
                   className={classes.link}
                 >
                   EN
-                </Link> */}
-                </div>
+                </Link>
+                </div>*/}
 
-                <Stack direction="row" spacing={2}>
-                  {/* <Button variant="outlined">Loogi Sisse</Button>
+                {/*<Stack direction="row" spacing={2}>
+                   <Button variant="outlined">Loogi Sisse</Button>
 
                   <Button
                     className={classes.button}
@@ -88,8 +77,8 @@ function Navbar() {
                     href="#contained-buttons"
                   >
                     Registreeri
-                  </Button> */}
-                </Stack>
+                  </Button> 
+                </Stack>*/}
               </div>
             )}
           </div>
