@@ -212,8 +212,8 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("price");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { proceduresValue, setProceduresValue } = useContext(GlobalContext); // Catches chosen Procedures in Tabel
   const { procedures, setProcedures } = useContext(GlobalContext); // Catches chosen Procedures in Tabel
+  const { proceduresValue, setProceduresValue } = useContext(GlobalContext); // Catches chosen Procedures in Tabel
 
   //   useEffect(() => {
   //     loadProcedures();
@@ -258,7 +258,6 @@ export default function EnhancedTable() {
     setProceduresValue(newSelected);
     console.log(setProcedures);
   };
-
   // Changing pages
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -273,7 +272,6 @@ export default function EnhancedTable() {
   // Counting of how much is selected
   const isSelected = (proc_title_et) =>
     proceduresValue.indexOf(proc_title_et) !== -1;
-
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - procedures.length) : 0;

@@ -1,7 +1,9 @@
 // !! https://www.youtube.com/watch?v=kQTCLap8tvo&t=2566s
 // https://www.youtube.com/watch?v=o3eR0X91Ogs
 
-import React from "react";
+import React, { useContext } from "react";
+
+import { GlobalContext } from "./../../Context";
 import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -25,6 +27,7 @@ function EmailSender(props) {
   const [emailError, setEmailError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [messageError, setMessageError] = useState(false);
+  const { proceduresValue, setProceduresValue } = useContext(GlobalContext); // Catches chosen Procedures in Tabel
 
   const handleRequest = async (e) => {
     e.preventDefault(); // stops the default action of a selected element
@@ -43,7 +46,7 @@ function EmailSender(props) {
 
     subject === "" ? setSubjectError(true) : setSubject("");
 
-    message === "" ? setMessageError(true) : setName("");
+    message === "" ? setMessageError(true) : setMessage("");
 
     if (name && email && subject && message !== "" && email.match(regexTest)) {
       setLoading(true);
@@ -52,17 +55,21 @@ function EmailSender(props) {
 
       console.log({ email, message, name, subject }); // TODO see the object in console
 
+      const chosenProcedures = proceduresValue
+        .map((n) => `procedures=${n}`)
+        .join("&"); // Take props, mapp it and with query param join
+
       // Rest Api with query parameters
       const response = await axios
         .post(
-          `http://localhost:4000/api/mail/sendmail?name=${name}&email=${email}&subject=${subject}&message=${message}`
+          `http://localhost:4000/api/mail/sendmail?name=${name}&email=${email}&subject=${subject}&message=${message}&${chosenProcedures}`
         )
         .then((res) => {
           setLetter(response.data);
           alert("Email Sent Successfully");
           setLoading(false);
           console.log(res);
-
+          console.log(setProceduresValue);
           console.log(letter);
         });
     }

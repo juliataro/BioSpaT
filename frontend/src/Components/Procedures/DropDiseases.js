@@ -38,18 +38,6 @@ function DropDiseases() {
     loadData();
   }, [setDiseases]);
 
-  // Fetch Diseases in dropdown on Page load
-
-  // const loadData = async () => {
-  //   const response = await axios.get(
-  //     "http://localhost:4000/api/diseases/all/et"
-  //   );
-  //   setDiseases(response.data);
-  // };
-  // useEffect(() => {
-  //   loadData();
-  // }, [setDiseases]);
-
   // Handling Selected valjues
   function handleSelectChange(event, newValues) {
     setDiseasesValue(newValues.map((disease) => disease.dis_id));

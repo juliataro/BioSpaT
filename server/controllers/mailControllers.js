@@ -9,6 +9,7 @@ exports.sendMail = (req, res, next) => {
     let userEmail = req.query.email;
     let userSubject = req.query.subject;
     let userMessage = req.query.message;
+    let userProcedures = req.query.procedures;
 
     // Reusable transport method that opens pool of SMTP connections
     let smtpTransport = nodemailer.createTransport({
@@ -32,7 +33,8 @@ exports.sendMail = (req, res, next) => {
       from: process.env.SMTP_TO_EMAIL,
       to: userEmail,
       subject: userSubject,
-      text: userMessage,
+
+      html: `<b>Tere, ${userName}!</b> </br><p>BioSpa protseduurite eelvaliku test.</p>\n </br><p>Teie sõnum:\n</br>${userMessage} </p></br><p>Protseduurid teie valisite: ${userProcedures}</p>`,
     };
 
     // Send email with defined transport object
