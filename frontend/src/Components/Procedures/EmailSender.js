@@ -79,7 +79,7 @@ function EmailSender(props) {
     <form onSubmit={handleRequest} method="POST">
       <Typography variant="h6" component="div" gutterBottom mt={7} mb={3}>
         {loading
-          ? "Saadetakse..."
+          ? "Kiri on saadetut"
           : "Sisestage palun andmed, et saada otsimise tulemus oma emailile"}
       </Typography>
 

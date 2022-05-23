@@ -18,7 +18,7 @@ exports.sendMail = (req, res, next) => {
       port: 465,
       secure: true,
       logger: true, // logs to console
-      debug: true, // logs SMTP traffic
+      debug: true, // logs errors
       transactionLog: true, // include SMTP traffic in the logs
       auth: {
         user: process.env.SMTP_TO_EMAIL,
@@ -34,7 +34,9 @@ exports.sendMail = (req, res, next) => {
       to: userEmail,
       subject: userSubject,
 
-      html: `<b>Tere, ${userName}!</b> </br><p>BioSpa protseduurite eelvaliku test.</p>\n </br><p>Teie sõnum:\n</br>${userMessage} </p></br><p>Protseduurid teie valisite: ${userProcedures}</p>`,
+      html: `<b>Tere, ${userName}!</b> </br><p>BioSpa protseduurite eelvaliku test.</p>\n 
+      </br><p>Teie sõnum:\n</br>${userMessage} </p></br>
+      <p>Protseduurid teie valisite: ${userProcedures}</p>`,
     };
 
     // Send email with defined transport object
