@@ -28,6 +28,10 @@ exports.sendMail = (req, res, next) => {
 
     smtpTransport.close(); // Closess the connection if there is no need for long
 
+    const isProcedures = userProcedures
+      ? `${userProcedures} `
+      : "Protseduurid pole valitud";
+
     // Setup email data with unicode symbols
     var mailOptions = {
       from: process.env.SMTP_TO_EMAIL,
@@ -36,7 +40,7 @@ exports.sendMail = (req, res, next) => {
 
       html: `<b>Tere, ${userName}!</b> </br><p>BioSpa protseduurite eelvaliku test.</p>\n 
       </br><p>Teie sõnum:\n</br>${userMessage} </p></br>
-      <p>Protseduurid teie valisite: ${userProcedures}</p>`,
+      <p>Protseduurid teie valisite: ${isProcedures}</p>`,
     };
 
     // Send email with defined transport object
