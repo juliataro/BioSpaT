@@ -1,4 +1,9 @@
-import React from "react";
+// !! https://www.youtube.com/watch?v=kQTCLap8tvo&t=2566s
+// https://www.youtube.com/watch?v=o3eR0X91Ogs
+
+import React, { useContext } from "react";
+
+import { GlobalContext } from "./../../Context";
 import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -22,6 +27,7 @@ function EmailSender(props) {
   const [emailError, setEmailError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [messageError, setMessageError] = useState(false);
+  const { proceduresValue, setProceduresValue } = useContext(GlobalContext); // Catches chosen Procedures in Tabel
 
   const handleRequest = async (e) => {
     e.preventDefault(); // stops the default action of a selected element
@@ -40,7 +46,7 @@ function EmailSender(props) {
 
     subject === "" ? setSubjectError(true) : setSubject("");
 
-    message === "" ? setMessageError(true) : setName("");
+    message === "" ? setMessageError(true) : setMessage("");
 
     if (name && email && subject && message !== "" && email.match(regexTest)) {
       setLoading(true);
@@ -49,17 +55,21 @@ function EmailSender(props) {
 
       console.log({ email, message, name, subject }); // TODO see the object in console
 
+      const chosenProcedures = proceduresValue
+        .map((n) => `procedures=${n}`)
+        .join("&"); // Take props, mapp it and with query param join
+
       // Rest Api with query parameters
       const response = await axios
         .post(
-          `http://localhost:4000/api/mail/sendmail?name=${name}&email=${email}&subject=${subject}&message=${message}`
+          `http://localhost:4000/api/mail/sendmail?name=${name}&email=${email}&subject=${subject}&message=${message}&${chosenProcedures}`
         )
         .then((res) => {
           setLetter(response.data);
           alert("Email Sent Successfully");
           setLoading(false);
           console.log(res);
-
+          console.log(setProceduresValue);
           console.log(letter);
         });
     }
@@ -69,7 +79,7 @@ function EmailSender(props) {
     <form onSubmit={handleRequest} method="POST">
       <Typography variant="h6" component="div" gutterBottom mt={7} mb={3}>
         {loading
-          ? "Saadetakse..."
+          ? "Kiri on saadetut"
           : "Sisestage palun andmed, et saada otsimise tulemus oma emailile"}
       </Typography>
 
@@ -128,6 +138,7 @@ function EmailSender(props) {
                 // data-private Hides Input Data in LogRocket Video
                 data-private="lipsum"
                 id="email"
+                data-testid="email-input"
                 type="text"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -137,6 +148,12 @@ function EmailSender(props) {
                 autoComplete="email"
                 error={emailError}
               />
+              {email &&
+                !/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/g.test(email) && (
+                  <span className="error" data-testid="error-msg">
+                    Palun sisestage aadress õigesti.
+                  </span>
+                )}
             </Box>
           </Tooltip>
         </Grid>
@@ -192,14 +209,15 @@ function EmailSender(props) {
       <Grid item xs={12} sm={6} md={6}>
         <Button
           id="buttonEmail"
-          disabled={loading}
+          data-testid="button"
+          disabled={email === ""}
           onClick={() => {
             handleRequest(name, email, subject, message);
           }}
           type="submit"
           variant="contained"
         >
-          Saada e-postile
+          Saada emailile
         </Button>
       </Grid>
     </form>
